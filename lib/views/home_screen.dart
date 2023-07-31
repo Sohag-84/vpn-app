@@ -14,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   ///for bottom navigation bar
   locationSelectionBottomNavigation(BuildContext context) {
     return SafeArea(
@@ -82,6 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: locationSelectionBottomNavigation(context),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [],
+      ),
     );
   }
 }
