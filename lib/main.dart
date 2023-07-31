@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:vpn_app/app%20preferences/app_preferences.dart';
 import 'package:vpn_app/views/home_screen.dart';
 
+late Size sizeScreen;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreferences.initHive();
