@@ -34,7 +34,7 @@ import 'package:vpn_app/main.dart';
           Text(
             subtitleText,
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
           ),
