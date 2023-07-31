@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vpn_app/app%20preferences/app_preferences.dart';
 import 'package:vpn_app/views/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppPreferences.initHive();
   runApp(const MyApp());
 }
 
@@ -19,17 +22,24 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           centerTitle: true,
-          elevation: 3,
         ),
       ),
+      themeMode: AppPreferences.isModeDark ? ThemeMode.dark : ThemeMode.light,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         appBarTheme: AppBarTheme(
           centerTitle: true,
-          elevation: 3,
         ),
       ),
       home: HomeScreen(),
     );
   }
+}
+
+///for set theme color
+extension AppTheme on ThemeData {
+  Color get lightTextColor =>
+      AppPreferences.isModeDark ? Colors.white70 : Colors.black54;
+  Color get bottomNavigationColor =>
+      AppPreferences.isModeDark ? Colors.white12 : Colors.redAccent;
 }
