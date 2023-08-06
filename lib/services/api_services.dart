@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vpn_app/app%20preferences/app_preferences.dart';
+import 'package:vpn_app/models/ip_info.dart';
 import 'package:vpn_app/models/vpn_info_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -44,5 +47,22 @@ class ApiVpnGate {
     if (vpnServerList.isNotEmpty) AppPreferences.vpnList = vpnServerList;
 
     return vpnServerList;
+  }
+
+  static Future<void> retrieveIPDetails(
+      {required Rx<IPInfo> ipInformation}) async {
+    try {
+      final response = await http.get(Uri.parse("http://ip-api.com/json/"));
+      final dataFromApi = jsonDecode(response.body);
+
+      ipInformation.value = IPInfo.fromJson(dataFromApi);
+    } catch (e) {
+      Get.snackbar(
+        "Error Occurred",
+        e.toString(),
+        colorText: Colors.white,
+        backgroundColor: Colors.redAccent.withOpacity(0.8),
+      );
+    }
   }
 }
