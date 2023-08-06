@@ -37,4 +37,31 @@ class VpnEngine {
   static Future<void> stopVpnNow() {
     return MethodChannel(methodChannelVpnControl).invokeMethod('stop');
   }
+
+  static Future<void> killSwitchOpenNow() {
+    return MethodChannel(methodChannelVpnControl).invokeMethod('kill-switch');
+  }
+
+  static Future<void> refreshStageNow() {
+    return MethodChannel(methodChannelVpnControl).invokeMethod('refresh');
+  }
+
+  static Future<String?> getStageNow() {
+    return MethodChannel(methodChannelVpnControl).invokeMethod('stage');
+  }
+
+  static Future<bool> isConnectedNow() {
+    return getStageNow().then((value) => value!.toLowerCase() == "connected");
+  }
+
+  ///stages of vpn connection
+  static const String vpnConnectedNow = 'connected';
+  static const String vpnDisconnectedNow = 'disconnected';
+  static const String vpnWaitConnectionNow = 'wait_connection';
+  static const String vpnAuthenticationNow = 'authenticating';
+  static const String vpnReconnectNow = 'reconnect';
+  static const String vpnNoConnectionNow = 'no_connection';
+  static const String vpnConnectingNow = 'connecting';
+  static const String vpnPrepareNow = 'prepare';
+  static const String vpnDeniedNow = 'denied';
 }
